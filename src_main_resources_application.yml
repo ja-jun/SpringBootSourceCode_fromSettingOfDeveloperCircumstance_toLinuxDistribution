@@ -1,0 +1,61 @@
+spring:
+  profiles:
+    active: local # 기본적으로 local이 선택된다는 뜻
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/ 
+      suffix: .jsp
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/site1?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: 
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB      
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: GMAIL아이디
+    password: GMAIL비번
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+mybatis:
+  type-aliases-package: com.example.demo.dto
+custom:
+  logoText: 사이트1
+  uploadDir: C:/my_work/site1/uploads
+  emailSender: no-reply@noreply.com
+  emailSenderName: 사이트1 관리자
+
+---
+
+spring:
+  profiles: local
+server:
+  port: 8085 # 포트번호 치환
+
+---
+
+spring:
+  profiles: production
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/site3?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: site3
+    password: sbs123414
+logging:
+  level:
+    root: info
+server:
+  port: 38033 # 포트번호 치환(서비스 용)
+custom:
+  uploadDir: /web/site3/public/uploads
+  
+  
